@@ -1,0 +1,22 @@
+{
+  "name": "cartilage",
+  "version": "1.0.0",
+  "homepage": "https://github.com/maximumdata/cartilage",
+  "authors": [
+    "Mike Dettmer <mike@mikedettmer.com>"
+  ],
+  "description": "A wordpress starter theme using bourbon, neat, and sass",
+  "license": "GPL",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bourbon": "~4.2.3",
+    "neat": "~1.7.2"
+  }
+}
