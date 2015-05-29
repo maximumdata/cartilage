@@ -14,7 +14,7 @@ var gulp        = require('gulp'),
       'js': 'dev/js/**/*.js'
     },
     output      = {
-      'css' : 'public/css',
+      'css' : '',
       'js' : 'public/js'
     };
     
@@ -30,8 +30,9 @@ gulp.task('build-css', function() {
   return gulp.src(input.sassMaster)
     .pipe(sourcemaps.init())
       .pipe(sass())
-      .pipe(prefix("last 2 versions", "> 1%", "ie 8", "ie 7"))
+      .pipe(prefix("last 3 versions", "> 1%", "ie 8", "ie 7", "ie 6"))
       .pipe(minify())
+      .pipe(rename('style.css'))
     .pipe(sourcemaps.write())
     .pipe(gulp.dest(output.css));
 });
