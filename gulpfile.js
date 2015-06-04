@@ -11,20 +11,16 @@ var gulp        = require('gulp'),
     input       = {
       'sassAll': 'dev/sass/**/*.sass',
       'sassMaster' : 'dev/sass/master.sass',
-      'js': 'dev/js/**/*.js'
+      'jsCustom': 'dev/js/custom/*.js',
+      'jsVendor' : 'dev/js/vendor/*.js',
+      'jsAll' : 'dev/js/**/*.js'
     },
     output      = {
       'css' : '',
       'js' : 'public/js'
     };
     
-gulp.task('default', ['jshint','build-js','build-css','watch']);
-
-gulp.task('jshint', function() {
-  return gulp.src(input.js)
-    .pipe(jshint())
-    .pipe(jshint.reporter('jshint-stylish'));
-});
+gulp.task('default', ['jshint','build-js-vendor','build-js-custom','build-css','watch']);
 
 gulp.task('build-css', function() {
   return gulp.src(input.sassMaster)
@@ -37,16 +33,34 @@ gulp.task('build-css', function() {
     .pipe(gulp.dest(output.css));
 });
 
-gulp.task('build-js', function() {
-  return gulp.src(input.js)
+gulp.task('jshint', function() {
+  return gulp.src(input.jsCustom)
+    .pipe(jshint())
+    .pipe(jshint.reporter('jshint-stylish'));
+});
+
+gulp.task('build-js-vendor', function() {
+  return gulp.src(input.jsVendor)
     .pipe(sourcemaps.init())
-      .pipe(concat('compiled.js'))
+      .pipe(concat('vendor.js'))
       .pipe(uglify())
     .pipe(sourcemaps.write())
     .pipe(gulp.dest(output.js));
 });
 
+gulp.task('build-js-custom', function() {
+  return gulp.src(input.jsCustom)
+    .pipe(sourcemaps.init())
+      .pipe(concat('custom.js')) // change the text 'custom.js' if you want your JS file branded
+      .pipe(uglify())
+    .pipe(sourcemaps.write())
+    .pipe(gulp.dest(output.js));
+});
+
+
+
 gulp.task('watch', function() {
-  gulp.watch(input.js, ['jshint', 'build-js']);
+  gulp.watch(input.jsCustom, ['jshint', 'build-js-custom']);
+  gulp.watch(input.jsVendor, ['build-js-vendor']);
   gulp.watch(input.sassAll, ['build-css']);
 });
