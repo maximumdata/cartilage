@@ -7,20 +7,23 @@ var gulp        = require('gulp'),
     prefix      = require('gulp-autoprefixer'),
     minify      = require('gulp-minify-css'),
     rename      = require('gulp-rename'),
+    imgMin      = require('gulp-imagemin'),
     
     input       = {
       'sassAll': 'dev/sass/**/*.sass',
       'sassMaster' : 'dev/sass/master.sass',
       'jsCustom': 'dev/js/custom/*.js',
       'jsVendor' : 'dev/js/vendor/*.js',
-      'jsAll' : 'dev/js/**/*.js'
+      'jsAll' : 'dev/js/**/*.js',
+      'images' : 'dev/img/**/*.*'
     },
     output      = {
-      'css' : '',
-      'js' : 'public/js'
+      'css' : 'public/css',
+      'js' : 'public/js',
+      'images' : 'public/img'
     };
     
-gulp.task('default', ['jshint','build-js-vendor','build-js-custom','build-css','watch']);
+gulp.task('default', ['jshint','build-js-vendor','build-js-custom','build-css','imgMin','watch']);
 
 gulp.task('build-css', function() {
   return gulp.src(input.sassMaster)
@@ -57,10 +60,18 @@ gulp.task('build-js-custom', function() {
     .pipe(gulp.dest(output.js));
 });
 
+gulp.task('imgMin', function () {
+  return gulp.src(input.images)
+    .pipe(imgMin({
+      progressive: true
+    }))
+    .pipe(gulp.dest(output.images));
+});
 
 
 gulp.task('watch', function() {
   gulp.watch(input.jsCustom, ['jshint', 'build-js-custom']);
   gulp.watch(input.jsVendor, ['build-js-vendor']);
   gulp.watch(input.sassAll, ['build-css']);
+  gulp.watch(input.images, ['imgMin']);
 });
