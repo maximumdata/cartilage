@@ -29,7 +29,10 @@ gulp.task('build-css', function() {
   return gulp.src(input.sassMaster)
     .pipe(sourcemaps.init())
       .pipe(sass())
-      .pipe(prefix("last 3 versions", "> 1%", "ie 8", "ie 7", "ie 6"))
+      .pipe(prefix({
+        browsers : ["last 3 versions", "> 1%", "ie 8", "ie 7", "ie 6"],
+        cascade: false
+      }))
       .pipe(minify())
       .pipe(rename('style.css'))
     .pipe(sourcemaps.write())
