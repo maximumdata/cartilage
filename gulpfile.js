@@ -35,7 +35,7 @@ gulp.task('build-css', function() {
       }))
       .pipe(minify())
       .pipe(rename('style.css'))
-    .pipe(sourcemaps.write())
+    .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest(output.css));
 });
 
@@ -50,7 +50,7 @@ gulp.task('build-js-vendor', function() {
     .pipe(sourcemaps.init())
       .pipe(concat('vendor.js'))
       .pipe(uglify())
-    .pipe(sourcemaps.write())
+    .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest(output.js));
 });
 
@@ -59,7 +59,7 @@ gulp.task('build-js-custom', function() {
     .pipe(sourcemaps.init())
       .pipe(concat('custom.js')) // change the text 'custom.js' if you want your JS file branded
       .pipe(uglify())
-    .pipe(sourcemaps.write())
+    .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest(output.js));
 });
 
