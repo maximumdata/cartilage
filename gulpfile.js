@@ -8,6 +8,7 @@ var gulp        = require('gulp'),
     minify      = require('gulp-minify-css'),
     rename      = require('gulp-rename'),
     imgMin      = require('gulp-imagemin'),
+    combMed     = require('gulp-combine-media-queries'),
     
     input       = {
       'sassAll': 'dev/sass/**/*.sass',
@@ -33,9 +34,10 @@ gulp.task('build-css', function() {
         browsers : ["last 3 versions", "> 1%", "ie 8", "ie 7", "ie 6"],
         cascade: false
       }))
+      .pipe(combMed())
       .pipe(minify())
       .pipe(rename('style.css'))
-    .pipe(sourcemaps.write('.'))
+    .pipe(sourcemaps.write())
     .pipe(gulp.dest(output.css));
 });
 
@@ -50,7 +52,7 @@ gulp.task('build-js-vendor', function() {
     .pipe(sourcemaps.init())
       .pipe(concat('vendor.js'))
       .pipe(uglify())
-    .pipe(sourcemaps.write('.'))
+    .pipe(sourcemaps.write())
     .pipe(gulp.dest(output.js));
 });
 
@@ -59,7 +61,7 @@ gulp.task('build-js-custom', function() {
     .pipe(sourcemaps.init())
       .pipe(concat('custom.js')) // change the text 'custom.js' if you want your JS file branded
       .pipe(uglify())
-    .pipe(sourcemaps.write('.'))
+    .pipe(sourcemaps.write())
     .pipe(gulp.dest(output.js));
 });
 
