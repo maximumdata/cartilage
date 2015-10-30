@@ -1,5 +1,5 @@
 # cartilage
-Cartilage is a less than bare-bones Wordpress starter theme. It is built using [Sass](http://sass-lang.com/), [Bourbon](https://github.com/thoughtbot/bourbon), and [Neat](https://github.com/thoughtbot/neat), 
+Cartilage is a less than bare-bones Wordpress starter theme. It is built using [Sass](http://sass-lang.com/), [Bourbon](https://github.com/thoughtbot/bourbon), and [Neat](https://github.com/thoughtbot/neat).
 
 ## Dependencies
 You must have [npm](https://nodejs.org/), [bower](http://bower.io/), and [gulp](http://gulpjs.com/) installed globally for this project to function! Of course, if you're using the excellent cloud based IDE [Cloud9](http://www.c9.io), like I did to create this, you've already got those installed in your workspace.
