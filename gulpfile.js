@@ -1,6 +1,5 @@
 var gulp        = require('gulp'),
     argv        = require('yargs').argv,
-    //gulpif      = require('gulp-if'),
     jshint      = require('gulp-jshint'),
     stylish     = require('jshint-stylish'),
     sass        = require('gulp-sass'),
@@ -53,7 +52,7 @@ gulp.task('imgMin', function () {
 gulp.task('prodCss', function() {
   return gulp.src(input.sassMaster)
     .pipe(sourcemaps.init())
-      .pipe(sass())
+      .pipe(sass({ outputStyle: 'expanded' }))
       .pipe(prefix({
         browsers : ["last 3 versions", "> 1%", "ie 8", "ie 7", "ie 6"],
         cascade: false
@@ -63,7 +62,7 @@ gulp.task('prodCss', function() {
       .pipe(gulp.dest(output.production.css))
       .pipe(minify())
       .pipe(rename('style.css'))
-    .pipe(sourcemaps.write())
+    .pipe(sourcemaps.write('./maps'))
     .pipe(gulp.dest(output.production.css));
 });
 
@@ -98,13 +97,13 @@ gulp.task('prodWatch', function() {
 gulp.task('devCss', function() {
   return gulp.src(input.sassMaster)
     .pipe(sourcemaps.init())
-      .pipe(sass())
+      .pipe(sass({ outputStyle: 'expanded' }))
       .pipe(prefix({
         browsers : ["last 3 versions", "> 1%", "ie 8", "ie 7", "ie 6"],
         cascade : true
       }))
       .pipe(rename('style.css'))
-    .pipe(sourcemaps.write())
+    .pipe(sourcemaps.write('./maps'))
     .pipe(gulp.dest(output.dev.css));
 });
 
