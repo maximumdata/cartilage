@@ -86,7 +86,7 @@ gulp.task('prodJsCustom', function() {
 
 gulp.task('prodWatch', function() {
   gulp.watch(input.jsCustom, ['jshint', 'prodJsCustom']);
-  gulp.watch(input.jsVendor, ['prodJsWatch']);
+  gulp.watch(input.jsVendor, ['prodJsVendor']);
   gulp.watch(input.sassAll, ['prodCss']);
   gulp.watch(input.images, ['imgMin']);
 });
@@ -125,7 +125,7 @@ gulp.task('devJsCustom', function() {
 
 gulp.task('devWatch', function() {
   gulp.watch(input.jsCustom, ['jshint', 'devJsCustom']);
-  gulp.watch(input.jsVendor, ['devJsWatch']);
+  gulp.watch(input.jsVendor, ['devJsVendor']);
   gulp.watch(input.sassAll, ['devCss']);
   gulp.watch(input.images, ['imgMin']);
 });
