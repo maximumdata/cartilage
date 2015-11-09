@@ -111,7 +111,6 @@ gulp.task('devJsVendor', function() {
   return gulp.src(input.jsVendor)
     .pipe(sourcemaps.init())
       .pipe(concat('vendor.js'))
-      .pipe(uglify())
     .pipe(sourcemaps.write())
     .pipe(gulp.dest(output.dev.js));
 });
@@ -120,7 +119,6 @@ gulp.task('devJsCustom', function() {
   return gulp.src(input.jsCustom)
     .pipe(sourcemaps.init())
       .pipe(concat('custom.js'))
-      .pipe(uglify())
     .pipe(sourcemaps.write())
     .pipe(gulp.dest(output.dev.js));
 });
